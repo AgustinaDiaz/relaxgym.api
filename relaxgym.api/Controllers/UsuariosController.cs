@@ -67,6 +67,7 @@ namespace relaxgym.api.Controllers
                 ClaveUsuario = createUsuarioRequest.ClaveUsuario,
                 IdEstadoUsuario = createUsuarioRequest.IdEstadoUsuario,
                 IdRol = createUsuarioRequest.IdRol,
+                FechaAlta = DateTime.Now
             };
 
             _dbContext.Attach(nuevoUsuario);

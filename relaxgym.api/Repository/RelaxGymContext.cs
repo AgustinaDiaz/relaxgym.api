@@ -46,6 +46,7 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Usuario>().Property(u => u.Telefono).HasColumnType("decimal(18,0)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.NombreUsuario).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.ClaveUsuario).HasColumnType("varchar(100)").IsRequired();
+            modelBuilder.Entity<Usuario>().Property(u => u.FechaAlta).HasColumnType("datetime(100)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.IdEstadoUsuario).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.IdRol).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Usuario>().HasOne(e => e.EstadoUsuario).WithMany().HasForeignKey(p => p.IdEstadoUsuario).HasConstraintName("FK_USUARIOS_ESTADOS_USUARIOS").IsRequired();

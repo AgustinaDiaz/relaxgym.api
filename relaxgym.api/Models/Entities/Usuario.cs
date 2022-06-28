@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace relaxgym.api.Entities
 {
@@ -12,6 +13,7 @@ namespace relaxgym.api.Entities
         public decimal Telefono { get; set; }
         public string NombreUsuario { get; set; }
         public string ClaveUsuario { get; set; }
+        public DateTime FechaAlta { get; set; }
         public int IdEstadoUsuario { get; set; }
         public virtual EstadoUsuario EstadoUsuario { get; set; }
         public virtual ICollection<UsuarioTurno> Turnos { get; set; }

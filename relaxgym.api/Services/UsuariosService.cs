@@ -26,6 +26,7 @@ namespace relaxgym.api.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
+                    new Claim(ClaimTypes.PrimarySid, usuario.Id.ToString()),
                     new Claim(ClaimTypes.Name, usuario.NombreUsuario),
                     new Claim(ClaimTypes.Role, usuario.Rol.Id.ToString())
                 }),
