@@ -84,6 +84,7 @@ namespace relaxgym.api
             });
 
             services.AddTransient<IUsuariosService, UsuariosService>();
+            services.AddTransient<IMailSenderService, MailSenderService>();
 
             string mySqlConnectionStr = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContextPool<RelaxGymContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));

@@ -23,6 +23,22 @@ namespace relaxgym.api.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<SolicitudCambioPassword>().ToTable("solicitudes_cambio_password");
+            modelBuilder.Entity<SolicitudCambioPassword>().HasKey(u => u.Id).HasName("PRIMARY");
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.FechaSolicitud).HasColumnType("datetime").IsRequired();
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.FechaConfirmacion).HasColumnType("datetime");
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.AntiguaClave).HasColumnType("varchar(100)");
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.NuevaClave).HasColumnType("varchar(100)");
+            modelBuilder.Entity<SolicitudCambioPassword>().HasOne(e => e.EstadoSolicitud).WithMany().HasForeignKey(p => p.IdEstadoSolicitud).HasConstraintName("FK_SOLICITUDES_CAMBIO_PASSWORD_ESTADOS_SOLICITUDES").IsRequired();
+            modelBuilder.Entity<SolicitudCambioPassword>().HasOne(p => p.Usuario).WithMany().HasForeignKey(p => p.IdUsuario).HasConstraintName("FK_SOLICITUDES_CAMBIO_PASSWORD_USUARIOS").IsRequired();
+
+            modelBuilder.Entity<EstadoSolicitud>().ToTable("estados_solicitudes");
+            modelBuilder.Entity<EstadoSolicitud>().HasKey(u => u.Id).HasName("PRIMARY");
+            modelBuilder.Entity<EstadoSolicitud>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<EstadoSolicitud>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
+            modelBuilder.Entity<EstadoSolicitud>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<EstadoUsuario>().ToTable("estados_usuarios");
             modelBuilder.Entity<EstadoUsuario>().HasKey(u => u.Id).HasName("PRIMARY");
@@ -46,7 +62,7 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Usuario>().Property(u => u.Telefono).HasColumnType("decimal(18,0)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.NombreUsuario).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.ClaveUsuario).HasColumnType("varchar(100)").IsRequired();
-            modelBuilder.Entity<Usuario>().Property(u => u.FechaAlta).HasColumnType("datetime(100)").IsRequired();
+            modelBuilder.Entity<Usuario>().Property(u => u.FechaAlta).HasColumnType("datetime").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.IdEstadoUsuario).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.IdRol).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Usuario>().HasOne(e => e.EstadoUsuario).WithMany().HasForeignKey(p => p.IdEstadoUsuario).HasConstraintName("FK_USUARIOS_ESTADOS_USUARIOS").IsRequired();

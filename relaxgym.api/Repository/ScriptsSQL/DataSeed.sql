@@ -1,9 +1,12 @@
-INSERT INTO relaxgym_db.roles VALUES(1,'1C777053CC8846E588E6630FFBAFD317', 'Administrador');
-INSERT INTO relaxgym_db.roles VALUES(2,'21E7E11C6107494B868386335C0D56ED', 'Entrenador');
-INSERT INTO relaxgym_db.roles VALUES(3,'44EDB5595112416EAF42B4E15D845F39', 'Alumno');
+INSERT INTO relaxgym_db.roles VALUES(1,'daaa56ea94ba4b9ea7c6f078be7990da', 'Administrador');
+INSERT INTO relaxgym_db.roles VALUES(2,'ba69a7c1cfeb4ed7a40ef7b017e4e0a3', 'Entrenador');
+INSERT INTO relaxgym_db.roles VALUES(3,'f5a3d570f40f4ae9acb1161038a24d16', 'Alumno');
 
-INSERT INTO relaxgym_db.estados_usuarios VALUES(1,'80420E3EDB27404BAC11306A5518178A', 'Activo');
-INSERT INTO relaxgym_db.estados_usuarios VALUES(2,'9B8E68BB9979424ABC5432A12FC20AF8', 'Inactivo');
+INSERT INTO relaxgym_db.estados_usuarios VALUES(1,'9d57cd37e86842f088dbc918a2ac6f27', 'Activo');
+INSERT INTO relaxgym_db.estados_usuarios VALUES(2,'a79be5515363423c964ee3875471fb97', 'Inactivo');
+
+INSERT INTO relaxgym_db.estados_solicitudes VALUES(1,'b685cba76a544ef8aa21c091844fa748', 'Activo');
+INSERT INTO relaxgym_db.estados_solicitudes VALUES(2,'8c271acc8ddc46ca9555b7bef647ee68', 'Finalizado');
 
 INSERT INTO relaxgym_db.usuarios VALUES(1,'d63ca7480aab4f5c89c27d2223bdbb2b', 'Agustina', 'Diaz', 'ag@gmail.com', 3589658423, 'adiaz', 'diaz123', '20220101', 1, 1);
 INSERT INTO relaxgym_db.usuarios VALUES(2,'592a526d45774dea9db24cd6dbeb48ec', 'Juan Andres', 'Viglianco', 'jv@gmail.com', 3364340196, 'jviglianco', 'viglianco123', '20220105', 1, 1);
@@ -18,6 +21,13 @@ INSERT INTO relaxgym_db.usuarios VALUES(9,'7e9e6e99235343adbf3a32242e855a5a', 'C
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.usuarios;
+SELECT * FROM relaxgym_db.solicitudes_cambio_password;
 
 DELETE FROM relaxgym_db.usuarios
-WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10)
+WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12);
+
+DELETE FROM relaxgym_db.roles
+WHERE Id IN (1, 2, 3);
+
+DELETE FROM relaxgym_db.estados_usuarios
+WHERE Id IN (1, 2);

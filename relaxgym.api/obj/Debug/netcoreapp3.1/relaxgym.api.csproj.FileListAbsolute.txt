@@ -86,9 +86,6 @@ D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\staticweba
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.pdb
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.genruntimeconfig.cache
-D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.csproj.CoreCompileInputs.cache
-D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.MvcApplicationPartsAssemblyInfo.cs
-D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.MvcApplicationPartsAssemblyInfo.cache
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
@@ -96,3 +93,7 @@ D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.csproj.CoreCompileInputs.cache
+D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.MvcApplicationPartsAssemblyInfo.cs
+D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.MvcApplicationPartsAssemblyInfo.cache
+D:\workspace\Others\relaxgym.api\relaxgym.api\bin\Debug\netcoreapp3.1\Mailjet.Client.dll

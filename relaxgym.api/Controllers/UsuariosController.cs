@@ -20,11 +20,14 @@ namespace relaxgym.api.Controllers
     {
         private readonly RelaxGymContext _dbContext;
         private readonly IUsuariosService _usuarioService;
+        private readonly IMailSenderService _mailSenderService;
         public UsuariosController(IUsuariosService usuarioService,
-                                  RelaxGymContext dbContext)
+                                  RelaxGymContext dbContext,
+                                  IMailSenderService mailSenderService)
         {
             _usuarioService = usuarioService;
             _dbContext = dbContext;
+            _mailSenderService = mailSenderService;
         }
 
         [AllowAnonymous]
@@ -101,7 +104,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUsuarioById(int idUsuario)
+        public async Task<IActionResult> GetUsuarioByIdAsync(int idUsuario)
         {
             Usuario usuario = await _dbContext.Set<Usuario>()
                                    .Include(x => x.EstadoUsuario)
@@ -121,7 +124,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteUsuarioById(int idUsuario)
+        public async Task<IActionResult> DeleteUsuarioByIdAsync(int idUsuario)
         {
             Usuario usuario = await _dbContext.Set<Usuario>()
                                    .Include(x => x.EstadoUsuario)
@@ -146,7 +149,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateUsuarioById(int idUsuario, UpdateUsuarioRequest updateUsuarioRequest)
+        public async Task<IActionResult> UpdateUsuarioByIdAsync(int idUsuario, UpdateUsuarioRequest updateUsuarioRequest)
         {
             bool estadoActualizarExists = await _dbContext.Set<EstadoUsuario>().AnyAsync(x => x.Id == updateUsuarioRequest.IdEstadoUsuario);
 
