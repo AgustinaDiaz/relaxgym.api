@@ -1,3 +1,30 @@
+INSERT INTO relaxgym_db.tipos_ejercicios VALUES(1,'497eec999630475687785c1dba62c01a', 'Brazos');
+INSERT INTO relaxgym_db.tipos_ejercicios VALUES(2,'a253e03e0ae74af6a6b347447bc10972', 'Piernas');
+INSERT INTO relaxgym_db.tipos_ejercicios VALUES(3,'302349dab90c4c699d8945dac22a477a', 'Gluteos');
+INSERT INTO relaxgym_db.tipos_ejercicios VALUES(4,'97bf0f83d4f04805a7b35f9548119bfd', 'Abdomen');
+
+INSERT INTO relaxgym_db.ejercicios VALUES(1,'c5b43ff9de194e08bf7215ac5fea70c3', 'Sentadilla', 'Pies apoyados a la anchura de tus caderas con las puntas de los pies hacia delante. No levantar los talones del suelo. Extiende tus brazos hacia delante para darte mayor equilibrio.', 'https://www.youtube.com/embed/upMcew_nvrM', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(2,'af141395bd3343ec819a19f4077c3f94', 'Estocada Frontal', 'Tendras que colocarte de pie, con la espalda recta y dar una zancada hacia adelante mientras la otra pierna desciende llegando con la rodilla casi al suelo. La pierna que da la zancada debe mantener un ángulo de 90 grados durante el descenso.', 'https://www.youtube.com/embed/-df_7H0X7KE', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(3,'34a24418ceff4693b1c5100b4aee71de', 'Estocada con Rotacion', 'Este ejercicio funcional Integra el trabajo de piernas, centro y brazos. Puedes hacerlo con o sin el peso adicional dependiendo tu nivel de entrenamiento', 'https://www.youtube.com/embed/0Xnmo9W7CTU', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(4,'f3ce1e436bee4e71ad365fa766e53915', 'Estocada Lateral', 'En lugar de dar la zancada hacia adelante la daremos hacia un lado y descenderemos mientras realizamos el paso lateral. Es importante mantener la espalda recta e incorporada hacia adelante para que el ejercicio se realice correctamente.', 'https://www.youtube.com/embed/yTRoslfXce0', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(5,'ae81e0f886c34d1399d18f2dea5d1edf', 'Triceps', 'Consiste en sentarse sobre un banco o silla y colocar las manos a los lados, con las palmas hacia abajo. Luego, se debe llevar el cuerpo ligeramente hacia adelante y flexionar los brazos; los glúteos quedan en el aire, ya no en el banco.', 'https://www.youtube.com/embed/HSR_m4uPYOw', 1);
+INSERT INTO relaxgym_db.ejercicios VALUES(6,'a5e70a14834c4fe2a0be435b2211f58b', 'Sentadilla Dinamica', 'Puedes escoger diferentes posiciones para tus brazos pero, una vez más, el movimiento y base es el mismo. En este caso habrá una mayor activación de la musculatura debido a que vamos a solicitar a nuestra musculatura un mayor esfuerzo para despegar nuestros pies del suelo en la fase de impulso y para absorber todo el impacto al caer tras la fase de vuelo', 'https://www.youtube.com/embed/fGYeZ5hoQPA', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(7,'eb43a25d86b4432285e29b9e244f0caa', 'Estocada con Salto', 'Sería una estocada estandar pero en lugar de volver a la posición inicial tras el descenso levantariamos y ejecutariamos directamente un salto avanzando asi hacia adelante.', 'https://www.youtube.com/embed/xN4rRRR9NB0', 2);
+INSERT INTO relaxgym_db.ejercicios VALUES(8,'d2667f85b8ca48a7a896a883704f2279', 'Estocada Reversa', 'En este tipo olvidaremos la zancada hacia adelante y lo que haremos es llevar la pierna hacia atrás. Ahora las angulaciones son diferentes y trabajaras cuadriceps, gluteos, isquiotibiales y distintos grupos musculares que en la estocada tradicional.', 'https://www.youtube.com/embed/-df_7H0X7KE', 2);
+
+INSERT INTO relaxgym_db.rutinas VALUES(1, '1fea337717ec4cffa3255de7ac328b48', 'Piernas: Sin Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 2, 'Bajo');
+INSERT INTO relaxgym_db.rutinas VALUES(2, 'e58eccdee8b042c7982603385b2c7e64', 'Piernas: Con Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 2, 'Alto');
+
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(1, 1, 4, 20);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(2, 1, 2, 10);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(3, 1, 2, 10);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(4, 1, 2, 10);
+
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(1, 2, 4, 10);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(2, 2, 2, 5);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(3, 2, 2, 5);
+INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(4, 2, 2, 5);
+
 INSERT INTO relaxgym_db.roles VALUES(1,'daaa56ea94ba4b9ea7c6f078be7990da', 'Administrador');
 INSERT INTO relaxgym_db.roles VALUES(2,'ba69a7c1cfeb4ed7a40ef7b017e4e0a3', 'Entrenador');
 INSERT INTO relaxgym_db.roles VALUES(3,'f5a3d570f40f4ae9acb1161038a24d16', 'Alumno');
@@ -18,6 +45,10 @@ INSERT INTO relaxgym_db.usuarios VALUES(7,'69e10fd3e5a944d99235aa01b5963d6f', 'F
 INSERT INTO relaxgym_db.usuarios VALUES(8,'ed5b1147f7d24ccaaca47823fc52d6b4', 'Jeremias', 'Ramb', 'jr@gmail.com', 3364859663, 'jramb', 'ramb123', '20220519', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(9,'7e9e6e99235343adbf3a32242e855a5a', 'Carlos', 'Diaz', 'cd@gmail.com', 344428695, 'cdiaz', 'diaz123', '20220627', 1, 2);
 
+SELECT * FROM relaxgym_db.tipos_ejercicios;
+SELECT * FROM relaxgym_db.ejercicios;
+SELECT * FROM relaxgym_db.rutinas;
+SELECT * FROM relaxgym_db.ejercicios_rutinas;
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.usuarios;
@@ -26,8 +57,17 @@ SELECT * FROM relaxgym_db.solicitudes_cambio_password;
 DELETE FROM relaxgym_db.usuarios
 WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12);
 
+DELETE FROM relaxgym_db.rutinas
+WHERE Id IN (1);
+
+DELETE FROM relaxgym_db.ejercicios_rutinas
+WHERE IdEjercicio IN (1);
+
 DELETE FROM relaxgym_db.roles
 WHERE Id IN (1, 2, 3);
 
 DELETE FROM relaxgym_db.estados_usuarios
 WHERE Id IN (1, 2);
+
+DELETE FROM relaxgym_db.ejercicios
+WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8);

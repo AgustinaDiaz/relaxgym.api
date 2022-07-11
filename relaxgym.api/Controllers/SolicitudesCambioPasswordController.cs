@@ -12,11 +12,11 @@ namespace relaxgym.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class SolicitudCambioPasswordController : ControllerBase
+    public class SolicitudesCambioPasswordController : ControllerBase
     {
         private readonly RelaxGymContext _dbContext;
         private readonly IMailSenderService _mailSenderService;
-        public SolicitudCambioPasswordController(RelaxGymContext dbContext,
+        public SolicitudesCambioPasswordController(RelaxGymContext dbContext,
                                                  IMailSenderService mailSenderService)
         {
             _dbContext = dbContext;
