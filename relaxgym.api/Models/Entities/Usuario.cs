@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace relaxgym.api.Entities
 {
@@ -17,6 +18,7 @@ namespace relaxgym.api.Entities
         public int IdEstadoUsuario { get; set; }
         public virtual EstadoUsuario EstadoUsuario { get; set; }
         public virtual ICollection<UsuarioTurno> Turnos { get; set; }
+        [JsonIgnore]
         public virtual ICollection<UsuarioRutina> Rutinas { get; set; }
         public int IdRol { get; set; }
         public virtual Rol Rol { get; set; }

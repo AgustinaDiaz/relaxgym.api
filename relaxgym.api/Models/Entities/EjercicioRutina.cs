@@ -10,7 +10,7 @@ namespace relaxgym.api.Entities
         public int IdRutina { get; set; }
         [JsonIgnore]
         public virtual Rutina Rutina { get; set; }
-        public int Series { get; set; }
         public int CantidadRepeticiones { get; set; }
+        public int Series { get; set; }
     }
 }

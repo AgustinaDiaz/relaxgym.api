@@ -9,11 +9,15 @@ namespace relaxgym.api.Repository
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Rutina> Rutinas { get; set; }
         public DbSet<UsuarioRutina> UsuariosRutinas { get; set; }
+        public DbSet<EjercicioRutina> EjerciciosRutinas { get; set; }
+        public DbSet<SolicitudCambioPassword> SolicitudesCambioPassword { get; set; }
         public DbSet<Turno> Turnos { get; set; }
         public DbSet<UsuarioTurno> UsuariosTurnos { get; set; }
         public DbSet<Clase> Clases { get; set; }
         public DbSet<EstadoNotificacion> EstadosNotificaciones { get; set; }
         public DbSet<EstadoUsuario> EstadosUsuarios { get; set; }
+        public DbSet<EstadoSolicitud> EstadosSolicitud { get; set; }
+        public DbSet<TipoEjercicio> TiposEjercicios { get; set; }
         public DbSet<Notificacion> Notificaciones { get; set; }
         public DbSet<Ejercicio> Ejercicios { get; set; }
 
@@ -73,9 +77,9 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Rutina>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.Descripcion).HasColumnType("varchar(1000)").IsRequired();
-            modelBuilder.Entity<Rutina>().Property(u => u.CantidadRondas).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.Nivel).HasColumnType("varchar(45)").IsRequired();
 
+            modelBuilder.Entity<UsuarioRutina>().ToTable("usuarios_rutinas");
             modelBuilder.Entity<UsuarioRutina>().HasKey(t => new { t.IdUsuario, t.IdRutina });
             modelBuilder.Entity<UsuarioRutina>().Property(u => u.Observacion).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<UsuarioRutina>().HasOne(pt => pt.Usuario).WithMany(p => p.Rutinas).HasForeignKey(pt => pt.IdUsuario);
@@ -83,7 +87,6 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<EjercicioRutina>().ToTable("ejercicios_rutinas");
             modelBuilder.Entity<EjercicioRutina>().HasKey(t => new { t.IdEjercicio, t.IdRutina });
-            modelBuilder.Entity<EjercicioRutina>().Property(u => u.Series).HasColumnType("int").IsRequired();
             modelBuilder.Entity<EjercicioRutina>().Property(u => u.CantidadRepeticiones).HasColumnType("int").IsRequired();
             modelBuilder.Entity<EjercicioRutina>().HasOne(pt => pt.Ejercicio).WithMany(p => p.Rutinas).HasForeignKey(pt => pt.IdEjercicio);
             modelBuilder.Entity<EjercicioRutina>().HasOne(pt => pt.Rutina).WithMany(t => t.Ejercicios).HasForeignKey(pt => pt.IdRutina);
@@ -97,6 +100,7 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Turno>().Property(u => u.CantidadAlumnos).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Turno>().Property(u => u.FechaHora).HasColumnType("datetime").IsRequired();
 
+            modelBuilder.Entity<UsuarioTurno>().ToTable("usuarios_turnos");
             modelBuilder.Entity<UsuarioTurno>().HasKey(t => new { t.IdUsuario, t.IdTurno });
             modelBuilder.Entity<UsuarioTurno>().HasOne(pt => pt.Usuario).WithMany(p => p.Turnos).HasForeignKey(pt => pt.IdUsuario);
             modelBuilder.Entity<UsuarioTurno>().HasOne(pt => pt.Turno).WithMany(t => t.Usuarios).HasForeignKey(pt => pt.IdTurno);

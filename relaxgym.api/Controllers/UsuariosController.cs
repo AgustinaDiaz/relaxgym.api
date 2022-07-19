@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using relaxgym.api.Entities;
+using relaxgym.api.Models;
 using relaxgym.api.Repository;
 using relaxgym.api.Requests;
 using relaxgym.api.Services;
@@ -20,14 +21,11 @@ namespace relaxgym.api.Controllers
     {
         private readonly RelaxGymContext _dbContext;
         private readonly IUsuariosService _usuarioService;
-        private readonly IMailSenderService _mailSenderService;
         public UsuariosController(IUsuariosService usuarioService,
-                                  RelaxGymContext dbContext,
-                                  IMailSenderService mailSenderService)
+                                  RelaxGymContext dbContext)
         {
             _usuarioService = usuarioService;
             _dbContext = dbContext;
-            _mailSenderService = mailSenderService;
         }
 
         [AllowAnonymous]
@@ -119,6 +117,27 @@ namespace relaxgym.api.Controllers
             return Ok(usuario);
         }
 
+        [HttpGet]
+        [Route("Rol/{idRol}/Rutina/{idRutina}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetUsuarioByIdRolForRutinaAsync(int idRol, int idRutina)
+        {
+            IList<Usuario> usuarios = await _dbContext.Set<Usuario>()
+                                   .Include(x => x.EstadoUsuario)
+                                   .Include(x => x.Rol)
+                                   .Where(x => x.IdRol == idRol && x.IdEstadoUsuario == (int)Enums.EstadosUsuario.Activo && !x.Rutinas.Any(x => x.IdRutina == idRutina))
+                                   .ToListAsync();
+
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(usuarios);
+        }
+
         [HttpDelete]
         [Route("{idUsuario}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Usuario))]
@@ -127,13 +146,23 @@ namespace relaxgym.api.Controllers
         public async Task<IActionResult> DeleteUsuarioByIdAsync(int idUsuario)
         {
             Usuario usuario = await _dbContext.Set<Usuario>()
-                                   .Include(x => x.EstadoUsuario)
-                                   .Include(x => x.Rol)
-                                   .FirstOrDefaultAsync(x => x.Id == idUsuario);
+                                    .Include(x => x.Rutinas)
+                                    .Include(x => x.Turnos)
+                                    .FirstOrDefaultAsync(x => x.Id == idUsuario);
 
             if (usuario == null)
             {
                 return NotFound();
+            }
+
+            foreach (UsuarioRutina usuarioRutina in usuario.Rutinas)
+            {
+                _dbContext.UsuariosRutinas.Remove(usuarioRutina);
+            }
+
+            foreach (UsuarioTurno usuarioTurno in usuario.Turnos)
+            {
+                _dbContext.UsuariosTurnos.Remove(usuarioTurno);
             }
 
             _dbContext.Usuarios.Remove(usuario);

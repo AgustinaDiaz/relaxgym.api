@@ -12,8 +12,8 @@ INSERT INTO relaxgym_db.ejercicios VALUES(6,'a5e70a14834c4fe2a0be435b2211f58b', 
 INSERT INTO relaxgym_db.ejercicios VALUES(7,'eb43a25d86b4432285e29b9e244f0caa', 'Estocada con Salto', 'Sería una estocada estandar pero en lugar de volver a la posición inicial tras el descenso levantariamos y ejecutariamos directamente un salto avanzando asi hacia adelante.', 'https://www.youtube.com/embed/xN4rRRR9NB0', 2);
 INSERT INTO relaxgym_db.ejercicios VALUES(8,'d2667f85b8ca48a7a896a883704f2279', 'Estocada Reversa', 'En este tipo olvidaremos la zancada hacia adelante y lo que haremos es llevar la pierna hacia atrás. Ahora las angulaciones son diferentes y trabajaras cuadriceps, gluteos, isquiotibiales y distintos grupos musculares que en la estocada tradicional.', 'https://www.youtube.com/embed/-df_7H0X7KE', 2);
 
-INSERT INTO relaxgym_db.rutinas VALUES(1, '1fea337717ec4cffa3255de7ac328b48', 'Piernas: Sin Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 2, 'Bajo');
-INSERT INTO relaxgym_db.rutinas VALUES(2, 'e58eccdee8b042c7982603385b2c7e64', 'Piernas: Con Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 2, 'Alto');
+INSERT INTO relaxgym_db.rutinas VALUES(1, '1fea337717ec4cffa3255de7ac328b48', 'Piernas: Sin Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 'Bajo');
+INSERT INTO relaxgym_db.rutinas VALUES(2, 'e58eccdee8b042c7982603385b2c7e64', 'Piernas: Con Peso', 'El entrenamiento de pierna es clave para transformar el cuerpo, ya sea para perder grasa o para ganar volumen. Un entrenamiento enfocado en el tren inferior significa que más de la mitad de tu cuerpo va a estar trabajando durante ese entrenamiento.', 'Alto');
 
 INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(1, 1, 4, 20);
 INSERT INTO relaxgym_db.ejercicios_rutinas VALUES(2, 1, 2, 10);
@@ -49,16 +49,20 @@ SELECT * FROM relaxgym_db.tipos_ejercicios;
 SELECT * FROM relaxgym_db.ejercicios;
 SELECT * FROM relaxgym_db.rutinas;
 SELECT * FROM relaxgym_db.ejercicios_rutinas;
+SELECT * FROM relaxgym_db.usuarios_rutinas;
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.usuarios;
 SELECT * FROM relaxgym_db.solicitudes_cambio_password;
 
+DELETE FROM relaxgym_db.ejercicios_rutinas
+WHERE IdRutina = 2 AND IdEjercicio IN (1,2,3,4);
+
 DELETE FROM relaxgym_db.usuarios
 WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12);
 
 DELETE FROM relaxgym_db.rutinas
-WHERE Id IN (1);
+WHERE Id IN (1, 2);
 
 DELETE FROM relaxgym_db.ejercicios_rutinas
 WHERE IdEjercicio IN (1);
