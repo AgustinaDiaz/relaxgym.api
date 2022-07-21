@@ -17,6 +17,7 @@ namespace relaxgym.api.Entities
         public DateTime FechaAlta { get; set; }
         public int IdEstadoUsuario { get; set; }
         public virtual EstadoUsuario EstadoUsuario { get; set; }
+        [JsonIgnore]
         public virtual ICollection<UsuarioTurno> Turnos { get; set; }
         [JsonIgnore]
         public virtual ICollection<UsuarioRutina> Rutinas { get; set; }

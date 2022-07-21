@@ -3,6 +3,26 @@ INSERT INTO relaxgym_db.tipos_ejercicios VALUES(2,'a253e03e0ae74af6a6b347447bc10
 INSERT INTO relaxgym_db.tipos_ejercicios VALUES(3,'302349dab90c4c699d8945dac22a477a', 'Gluteos');
 INSERT INTO relaxgym_db.tipos_ejercicios VALUES(4,'97bf0f83d4f04805a7b35f9548119bfd', 'Abdomen');
 
+INSERT INTO relaxgym_db.clases VALUES(1,'d2bcacfb94714642980aa1583686b3b7', 'Crossfit', 'Es un metodo de entrenamiento basado en ejercicios constantemente variados, con movimientos funcionales ejecutados a alta intensidad. Es un entrenamiento basado en los ejercicios de cuerpos militares, policiales y de bomberos.');
+INSERT INTO relaxgym_db.clases VALUES(2,'3553bb420f5b4eeebad4cf1f5adcb116', 'Funcional', 'El entrenamiento funcional se basa en realizar ejercicios que se adaptan a los movimientos naturales del cuerpo humano para trabajar de forma global músculos y articulaciones.');
+
+INSERT INTO relaxgym_db.turnos VALUES(1,'d2bcacfb94714642980aa1583686b3b7', 1, 30, '2022-07-20 10:30:00');
+INSERT INTO relaxgym_db.turnos VALUES(2,'3553bb420f5b4eeebad4cf1f5adcb116', 2, 20, '2022-07-20 11:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(3,'46085f48c46844c294b69ff2258ed43c', 1, 30, '2022-07-21 09:30:00');
+INSERT INTO relaxgym_db.turnos VALUES(4,'225441491599491da81912a77f3ae29c', 2, 20, '2022-07-21 13:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(5,'4a6742f001624d37a44458209e182f0f', 2, 20, '2022-07-19 09:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(6,'c8313808318e45d599d3f567bc2e01b7', 1, 30, '2022-07-19 08:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(7,'4a6742f001624d37a44458209e182f0f', 1, 30, '2022-07-22 07:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(8,'c8313808318e45d599d3f567bc2e01b7', 2, 20, '2022-07-22 08:00:00');
+
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,5);
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,6);
+
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,5);
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(7,5);
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,6);
+INSERT INTO relaxgym_db.usuarios_turnos VALUES(7,6);
+
 INSERT INTO relaxgym_db.ejercicios VALUES(1,'c5b43ff9de194e08bf7215ac5fea70c3', 'Sentadilla', 'Pies apoyados a la anchura de tus caderas con las puntas de los pies hacia delante. No levantar los talones del suelo. Extiende tus brazos hacia delante para darte mayor equilibrio.', 'https://www.youtube.com/embed/upMcew_nvrM', 2);
 INSERT INTO relaxgym_db.ejercicios VALUES(2,'af141395bd3343ec819a19f4077c3f94', 'Estocada Frontal', 'Tendras que colocarte de pie, con la espalda recta y dar una zancada hacia adelante mientras la otra pierna desciende llegando con la rodilla casi al suelo. La pierna que da la zancada debe mantener un ángulo de 90 grados durante el descenso.', 'https://www.youtube.com/embed/-df_7H0X7KE', 2);
 INSERT INTO relaxgym_db.ejercicios VALUES(3,'34a24418ceff4693b1c5100b4aee71de', 'Estocada con Rotacion', 'Este ejercicio funcional Integra el trabajo de piernas, centro y brazos. Puedes hacerlo con o sin el peso adicional dependiendo tu nivel de entrenamiento', 'https://www.youtube.com/embed/0Xnmo9W7CTU', 2);
@@ -48,10 +68,12 @@ INSERT INTO relaxgym_db.usuarios VALUES(9,'7e9e6e99235343adbf3a32242e855a5a', 'C
 SELECT * FROM relaxgym_db.tipos_ejercicios;
 SELECT * FROM relaxgym_db.ejercicios;
 SELECT * FROM relaxgym_db.rutinas;
+SELECT * FROM relaxgym_db.turnos;
 SELECT * FROM relaxgym_db.ejercicios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_rutinas;
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
+SELECT * FROM relaxgym_db.estados_notificaciones;
 SELECT * FROM relaxgym_db.usuarios;
 SELECT * FROM relaxgym_db.solicitudes_cambio_password;
 
@@ -63,6 +85,9 @@ WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12);
 
 DELETE FROM relaxgym_db.rutinas
 WHERE Id IN (1, 2);
+
+DELETE FROM relaxgym_db.turnos
+WHERE Id IN (7, 8);
 
 DELETE FROM relaxgym_db.ejercicios_rutinas
 WHERE IdEjercicio IN (1);
