@@ -21,6 +21,8 @@ namespace relaxgym.api.Entities
         public virtual ICollection<UsuarioTurno> Turnos { get; set; }
         [JsonIgnore]
         public virtual ICollection<UsuarioRutina> Rutinas { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<UsuarioNotificacion> Notificaciones { get; set; }
         public int IdRol { get; set; }
         public virtual Rol Rol { get; set; }
     }

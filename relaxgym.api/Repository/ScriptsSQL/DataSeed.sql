@@ -3,6 +3,12 @@ INSERT INTO relaxgym_db.tipos_ejercicios VALUES(2,'a253e03e0ae74af6a6b347447bc10
 INSERT INTO relaxgym_db.tipos_ejercicios VALUES(3,'302349dab90c4c699d8945dac22a477a', 'Gluteos');
 INSERT INTO relaxgym_db.tipos_ejercicios VALUES(4,'97bf0f83d4f04805a7b35f9548119bfd', 'Abdomen');
 
+INSERT INTO relaxgym_db.tipos_notificaciones VALUES(1,'84840de3a6194df988476a3f8792981e', 'General');
+INSERT INTO relaxgym_db.tipos_notificaciones VALUES(2,'9c643cbf50694f30948e2d6725b6dd19', 'Particular');
+
+INSERT INTO relaxgym_db.estados_notificaciones VALUES(1,'715018527475450f9b38ef0fcecee77b', 'Enviada');
+INSERT INTO relaxgym_db.estados_notificaciones VALUES(2,'859c803b8d60491f804ef7dffc992b20', 'Leida');
+
 INSERT INTO relaxgym_db.clases VALUES(1,'d2bcacfb94714642980aa1583686b3b7', 'Crossfit', 'Es un metodo de entrenamiento basado en ejercicios constantemente variados, con movimientos funcionales ejecutados a alta intensidad. Es un entrenamiento basado en los ejercicios de cuerpos militares, policiales y de bomberos.');
 INSERT INTO relaxgym_db.clases VALUES(2,'3553bb420f5b4eeebad4cf1f5adcb116', 'Funcional', 'El entrenamiento funcional se basa en realizar ejercicios que se adaptan a los movimientos naturales del cuerpo humano para trabajar de forma global músculos y articulaciones.');
 
@@ -10,13 +16,10 @@ INSERT INTO relaxgym_db.turnos VALUES(1,'d2bcacfb94714642980aa1583686b3b7', 1, 3
 INSERT INTO relaxgym_db.turnos VALUES(2,'3553bb420f5b4eeebad4cf1f5adcb116', 2, 20, '2022-07-20 11:00:00');
 INSERT INTO relaxgym_db.turnos VALUES(3,'46085f48c46844c294b69ff2258ed43c', 1, 30, '2022-07-21 09:30:00');
 INSERT INTO relaxgym_db.turnos VALUES(4,'225441491599491da81912a77f3ae29c', 2, 20, '2022-07-21 13:00:00');
-INSERT INTO relaxgym_db.turnos VALUES(5,'4a6742f001624d37a44458209e182f0f', 2, 20, '2022-07-19 09:00:00');
-INSERT INTO relaxgym_db.turnos VALUES(6,'c8313808318e45d599d3f567bc2e01b7', 1, 30, '2022-07-19 08:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(5,'f499895f5a084b4dad91174fc08b3391', 2, 2, '2022-07-19 09:00:00');
+INSERT INTO relaxgym_db.turnos VALUES(6,'0ee6ceb6fa3a4c38aad9202aeaefdd80', 1, 3, '2022-07-19 08:00:00');
 INSERT INTO relaxgym_db.turnos VALUES(7,'4a6742f001624d37a44458209e182f0f', 1, 30, '2022-07-22 07:00:00');
 INSERT INTO relaxgym_db.turnos VALUES(8,'c8313808318e45d599d3f567bc2e01b7', 2, 20, '2022-07-22 08:00:00');
-
-INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,5);
-INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,6);
 
 INSERT INTO relaxgym_db.usuarios_turnos VALUES(3,5);
 INSERT INTO relaxgym_db.usuarios_turnos VALUES(7,5);
@@ -71,6 +74,7 @@ SELECT * FROM relaxgym_db.rutinas;
 SELECT * FROM relaxgym_db.turnos;
 SELECT * FROM relaxgym_db.ejercicios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_rutinas;
+SELECT * FROM relaxgym_db.usuarios_turnos;
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.estados_notificaciones;
@@ -87,7 +91,7 @@ DELETE FROM relaxgym_db.rutinas
 WHERE Id IN (1, 2);
 
 DELETE FROM relaxgym_db.turnos
-WHERE Id IN (7, 8);
+WHERE Id IN (1,2,3,4,5,6,7,8);
 
 DELETE FROM relaxgym_db.ejercicios_rutinas
 WHERE IdEjercicio IN (1);

@@ -9,6 +9,7 @@ namespace relaxgym.api.Repository
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Rutina> Rutinas { get; set; }
         public DbSet<UsuarioRutina> UsuariosRutinas { get; set; }
+        public DbSet<UsuarioNotificacion> UsuariosNotificaciones { get; set; }
         public DbSet<EjercicioRutina> EjerciciosRutinas { get; set; }
         public DbSet<SolicitudCambioPassword> SolicitudesCambioPassword { get; set; }
         public DbSet<Turno> Turnos { get; set; }
@@ -18,6 +19,7 @@ namespace relaxgym.api.Repository
         public DbSet<EstadoUsuario> EstadosUsuarios { get; set; }
         public DbSet<EstadoSolicitud> EstadosSolicitud { get; set; }
         public DbSet<TipoEjercicio> TiposEjercicios { get; set; }
+        public DbSet<TipoNotificacion> TiposNotificaciones { get; set; }
         public DbSet<Notificacion> Notificaciones { get; set; }
         public DbSet<Ejercicio> Ejercicios { get; set; }
 
@@ -105,6 +107,11 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<UsuarioTurno>().HasOne(pt => pt.Usuario).WithMany(p => p.Turnos).HasForeignKey(pt => pt.IdUsuario);
             modelBuilder.Entity<UsuarioTurno>().HasOne(pt => pt.Turno).WithMany(t => t.Usuarios).HasForeignKey(pt => pt.IdTurno);
 
+            modelBuilder.Entity<UsuarioNotificacion>().ToTable("usuarios_notificaciones");
+            modelBuilder.Entity<UsuarioNotificacion>().HasKey(t => new { t.IdUsuario, t.IdNotificacion });
+            modelBuilder.Entity<UsuarioNotificacion>().HasOne(pt => pt.Usuario).WithMany(p => p.Notificaciones).HasForeignKey(pt => pt.IdUsuario);
+            modelBuilder.Entity<UsuarioNotificacion>().HasOne(pt => pt.Notificacion).WithMany(t => t.Usuarios).HasForeignKey(pt => pt.IdNotificacion);
+
             modelBuilder.Entity<Clase>().ToTable("clases");
             modelBuilder.Entity<Clase>().HasKey(u => u.Id).HasName("PRIMARY");
             modelBuilder.Entity<Clase>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
@@ -132,6 +139,12 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<TipoEjercicio>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
             modelBuilder.Entity<TipoEjercicio>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<TipoEjercicio>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
+
+            modelBuilder.Entity<TipoNotificacion>().ToTable("tipos_notificaciones");
+            modelBuilder.Entity<TipoNotificacion>().HasKey(u => u.Id).HasName("PRIMARY");
+            modelBuilder.Entity<TipoNotificacion>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<TipoNotificacion>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
+            modelBuilder.Entity<TipoNotificacion>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<Ejercicio>().ToTable("ejercicios");
             modelBuilder.Entity<Ejercicio>().HasKey(u => u.Id).HasName("PRIMARY");

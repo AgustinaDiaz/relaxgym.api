@@ -1,4 +1,6 @@
-﻿namespace relaxgym.api.Entities
+﻿using System.Collections.Generic;
+
+namespace relaxgym.api.Entities
 {
     public class Notificacion
     {
@@ -8,5 +10,6 @@
         public string Descripcion { get; set; }
         public int IdEstadoNotificacion { get; set; }
         public virtual EstadoNotificacion EstadoNotificacion { get; set; }
+        public virtual ICollection<UsuarioNotificacion> Usuarios { get; set; }
     }
 }
