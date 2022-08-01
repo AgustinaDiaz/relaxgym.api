@@ -118,6 +118,27 @@ namespace relaxgym.api.Controllers
         }
 
         [HttpGet]
+        [Route("Rol/{idRol}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetUsuarioByIdRolAsync(int idRol)
+        {
+            IList<Usuario> usuarios = await _dbContext.Set<Usuario>()
+                                   .Include(x => x.EstadoUsuario)
+                                   .Include(x => x.Rol)
+                                   .Where(x => x.IdRol == idRol && x.IdEstadoUsuario == (int)Enums.EstadosUsuario.Activo)
+                                   .ToListAsync();
+
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(usuarios);
+        }
+
+        [HttpGet]
         [Route("Rol/{idRol}/Rutina/{idRutina}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

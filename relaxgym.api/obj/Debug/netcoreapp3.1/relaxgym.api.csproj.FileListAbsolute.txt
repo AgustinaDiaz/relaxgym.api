@@ -96,3 +96,4 @@ D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\staticweba
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.dll
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.pdb
 D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.genruntimeconfig.cache
+D:\workspace\Others\relaxgym.api\relaxgym.api\obj\Debug\netcoreapp3.1\relaxgym.api.csprojAssemblyReference.cache
