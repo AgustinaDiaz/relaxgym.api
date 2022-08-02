@@ -133,6 +133,7 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Notificacion>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Notificacion>().Property(u => u.IdEstadoNotificacion).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Notificacion>().HasOne(p => p.EstadoNotificacion).WithMany().HasForeignKey(p => p.IdEstadoNotificacion).HasConstraintName("FK_NOTIFICACIONES_ESTADOS_NOTIFICACIONES").IsRequired();
+            modelBuilder.Entity<Notificacion>().HasOne(p => p.TipoNotificacion).WithMany().HasForeignKey(p => p.IdTipoNotificacion).HasConstraintName("FK_NOTIFICACIONES_TIPO_NOTIFICACIONES").IsRequired();
 
             modelBuilder.Entity<TipoEjercicio>().ToTable("tipos_ejercicios");
             modelBuilder.Entity<TipoEjercicio>().HasKey(u => u.Id).HasName("PRIMARY");

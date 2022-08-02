@@ -13,5 +13,11 @@
             Activo = 1,
             Inactivo = 2
         }
+
+        public enum EstadosNotifiacion
+        {
+            Enviada = 1,
+            Leida = 2
+        }
     }
 }

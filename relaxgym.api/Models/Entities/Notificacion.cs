@@ -10,6 +10,8 @@ namespace relaxgym.api.Entities
         public string Descripcion { get; set; }
         public int IdEstadoNotificacion { get; set; }
         public virtual EstadoNotificacion EstadoNotificacion { get; set; }
+        public int IdTipoNotificacion { get; set; }
+        public virtual TipoNotificacion TipoNotificacion { get; set; }
         public virtual ICollection<UsuarioNotificacion> Usuarios { get; set; }
     }
 }
