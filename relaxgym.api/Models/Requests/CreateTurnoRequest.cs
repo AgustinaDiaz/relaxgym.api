@@ -11,5 +11,6 @@ namespace relaxgym.api.Requests
         public int IdClase { get; set; }
         [Required]
         public DateTime FechaHora { get; set; }
+        public string Observacion { get; set; }
     }
 }

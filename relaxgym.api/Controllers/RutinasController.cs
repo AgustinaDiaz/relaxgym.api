@@ -34,6 +34,7 @@ namespace relaxgym.api.Controllers
                 IdWeb = Guid.NewGuid().ToString("N"),
                 Nombre = createRutinaRequest.Nombre,
                 Descripcion = createRutinaRequest.Descripcion,
+                IdUsuarioCreador = createRutinaRequest.IdUsuarioCreador,
                 Nivel = createRutinaRequest.Nivel
             };
 

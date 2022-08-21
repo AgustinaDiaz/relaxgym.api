@@ -28,6 +28,7 @@ namespace relaxgym.api.Services
                 {
                     new Claim(ClaimTypes.PrimarySid, usuario.Id.ToString()),
                     new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+                    new Claim(ClaimTypes.GivenName, string.Concat(usuario.Apellido, " ", usuario.Nombre)),
                     new Claim(ClaimTypes.Role, usuario.Rol.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Authentication:ExpirationToken"])),

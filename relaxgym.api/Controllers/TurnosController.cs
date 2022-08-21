@@ -33,7 +33,8 @@ namespace relaxgym.api.Controllers
             {
                 IdWeb = Guid.NewGuid().ToString("N"),
                 CantidadAlumnos = createTurnoRequest.CantidadAlumnos,
-                FechaHora = createTurnoRequest.FechaHora,
+                Observacion = createTurnoRequest.Observacion,
+                FechaHora = createTurnoRequest.FechaHora.ToLocalTime(),
                 IdClase = createTurnoRequest.IdClase
             };
 
@@ -101,6 +102,43 @@ namespace relaxgym.api.Controllers
 
             turnoActualizar.CantidadAlumnos = updateTurnoRequest.CantidadAlumnos;
             turnoActualizar.FechaHora = updateTurnoRequest.FechaHora;
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("Asignar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AsignarTurnoAsync(AsignarTurnoRequest asignarTurnoRequest)
+        {
+            Turno turnoAsignar = await _dbContext.Set<Turno>().FirstOrDefaultAsync(x => x.Id == asignarTurnoRequest.IdTurno);
+
+            if (turnoAsignar == null)
+            {
+                return ValidationProblem($"No existe el turno con id {asignarTurnoRequest.IdTurno}.");
+            }
+
+            foreach (int idUsuario in asignarTurnoRequest.IdUsuarios)
+            {
+                Usuario usuarioAsignar = await _dbContext.Set<Usuario>().FirstOrDefaultAsync(x => x.Id == idUsuario);
+
+                if (usuarioAsignar == null)
+                {
+                    continue;
+                }
+
+                UsuarioTurno nuevoUsuarioTurno = new UsuarioTurno()
+                {
+                    Turno = turnoAsignar,
+                    Usuario = usuarioAsignar,
+                };
+
+                _dbContext.Attach(nuevoUsuarioTurno);
+            }
 
             await _dbContext.SaveChangesAsync();
 

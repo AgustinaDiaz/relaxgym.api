@@ -83,6 +83,7 @@ CREATE TABLE `rutinas` (
   `Nombre` varchar(100) NOT NULL,
   `Descripcion` varchar(1000) NOT NULL,
   `Nivel` varchar(45) NOT NULL,
+  `UsuarioCreador` varchar(100) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `IdWeb_UNIQUE` (`IdWeb`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -126,6 +127,7 @@ CREATE TABLE `turnos` (
   `IdWeb` char(32) NOT NULL,
   `IdClase` int NOT NULL,
   `CantidadAlumnos` int NOT NULL,
+  `Observacion` varchar(100) NULL,
   `FechaHora` datetime NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `IdWeb_UNIQUE` (`IdWeb`),

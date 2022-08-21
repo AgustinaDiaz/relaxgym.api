@@ -9,6 +9,7 @@ namespace relaxgym.api.Entities
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string Nivel { get; set; }
+        public int IdUsuarioCreador { get; set; }
         public virtual ICollection<UsuarioRutina> Usuarios { get; set; }
         public virtual ICollection<EjercicioRutina> Ejercicios { get; set; }
     }

@@ -12,6 +12,8 @@ namespace relaxgym.api.Requests
         [Required]
         public string Nivel { get; set; }
         [Required]
+        public int IdUsuarioCreador { get; set; }
+        [Required]
         public IList<CreateRutinaEjercicioRequest> Ejercicios { get; set; }
     }
 }
