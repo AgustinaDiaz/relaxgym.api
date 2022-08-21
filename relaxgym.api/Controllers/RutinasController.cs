@@ -68,10 +68,11 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Rutina>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetAllEjerciciosAsync()
+        public async Task<IActionResult> GetAllRutinasAsync()
         {
             IList<Rutina> rutinas = await _dbContext.Set<Rutina>()
                                    .Include(x => x.Ejercicios).ThenInclude(x => x.Ejercicio).ThenInclude(x => x.TipoEjercicio)
+                                   .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
                                    .ToListAsync();
 
             if (rutinas == null)
@@ -99,6 +100,26 @@ namespace relaxgym.api.Controllers
             }
 
             return Ok(rutina);
+        }
+
+        [HttpGet]
+        [Route("Usuario/{idUsuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Rutina>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetRutinaByIdUsuarioAsync(int idUsuario)
+        {
+            IList<Rutina> rutinas = await _dbContext.Set<Rutina>()
+                                   .Include(x => x.Ejercicios).ThenInclude(x => x.Ejercicio).ThenInclude(x => x.TipoEjercicio)
+                                   .Where(x => x.Usuarios.Any(x => x.IdUsuario == idUsuario))
+                                   .ToListAsync();
+
+            if (rutinas == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rutinas);
         }
 
         [HttpDelete]
