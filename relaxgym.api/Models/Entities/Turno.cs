@@ -10,6 +10,7 @@ namespace relaxgym.api.Entities
         public int IdClase { get; set; }
         public virtual Clase Clase { get; set; }
         public int CantidadAlumnos { get; set; }
+        public string Observacion { get; set; }
         public DateTime FechaHora { get; set; }
         public ICollection<UsuarioTurno> Usuarios { get; set; }
     }
