@@ -122,7 +122,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUsuarioByIdRolAsync(int idRol)
+        public async Task<IActionResult> GetUsuariosByIdRolAsync(int idRol)
         {
             IList<Usuario> usuarios = await _dbContext.Set<Usuario>()
                                    .Include(x => x.EstadoUsuario)
@@ -143,7 +143,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUsuarioByIdRolForRutinaAsync(int idRol, int idRutina)
+        public async Task<IActionResult> GetUsuariosByIdRolForRutinaAsync(int idRol, int idRutina)
         {
             IList<Usuario> usuarios = await _dbContext.Set<Usuario>()
                                    .Include(x => x.EstadoUsuario)
@@ -164,7 +164,7 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Usuario>))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUsuarioByIdRolForTurnoAsync(int idRol, int idTurno)
+        public async Task<IActionResult> GetUsuariosByIdRolForTurnoAsync(int idRol, int idTurno)
         {
             IList<Usuario> usuarios = await _dbContext.Set<Usuario>()
                                    .Include(x => x.EstadoUsuario)

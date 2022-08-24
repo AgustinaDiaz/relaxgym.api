@@ -121,7 +121,7 @@ INSERT INTO relaxgym_db.usuarios VALUES(40,'6be5ab3211ea45e9932df4246169bc72', '
 INSERT INTO relaxgym_db.usuarios VALUES(41,'f48897902aa04005806a5ffcbb5294b9', 'Marcos', 'Fernandez', 'marcosfernan@hotmail.com', 3445202020, 'mfernandez', 'marquito10', '20220507', 1, 2);
 INSERT INTO relaxgym_db.usuarios VALUES(42,'ef2528be932740b7aff1e18a63aa7560', 'Manuela', 'Albornoz', 'manualbornoz@hotmail.com', 341445988, 'malbornoz', 'manu2015', '20220726', 1, 2);
 INSERT INTO relaxgym_db.usuarios VALUES(43,'5a4feba1e1c6404988be558dae89e014', 'Nadina', 'Bajaroff', 'nadib@hotmail.com', 3445502369, 'nbajaroff', 'nadibajaroff2022', '20220802', 1, 3);
-INSERT INTO relaxgym_db.usuarios VALUES(44,'383a3e6a3bee483fbc74ea07ba108005', 'Yanina', 'Chami', 'yanichami@hotmail.com', 11412577, 'ychami', 'yani123', '202200127', 1, 3);
+INSERT INTO relaxgym_db.usuarios VALUES(44,'383a3e6a3bee483fbc74ea07ba108005', 'Yanina', 'Chami', 'yanichami@hotmail.com', 11412577, 'ychami', 'yani123', '20220127', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(45,'d876b43c98e4444f875c59adfcf33cd9', 'Hebe', 'Martinez', 'hebe1988@hotmail.com', 3400402366, 'hmartinez', 'martinez123', '20220809', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(46,'f90c5f373721468f8845ed0327c67713', 'Clara', 'Peralta', 'clarap@hotmail.com', 3445102598, 'cperalta', 'peralta123', '20220730', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(47,'0d9a0cfbb00e415c87b2bea7df23a8f0', 'Pablo', 'Garcia', 'pablitog@hotmail.com', 341484848, 'pgarcia', 'garcia123', '20220404', 1, 3);

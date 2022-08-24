@@ -19,5 +19,12 @@
             Enviada = 1,
             Leida = 2
         }
+
+        public enum Roles
+        {
+            Administrador = 1,
+            Entrenador = 2,
+            Alumno = 3
+        }
     }
 }
