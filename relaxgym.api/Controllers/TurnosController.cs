@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using relaxgym.api.Entities;
+using relaxgym.api.Models;
 using relaxgym.api.Repository;
 using relaxgym.api.Requests;
 using System;
@@ -29,6 +30,14 @@ namespace relaxgym.api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateTurnoAsync(CreateTurnoRequest createTurnoRequest)
         {
+            Usuario entrenadorAsignar = await _dbContext.Set<Usuario>()
+                                                        .FirstOrDefaultAsync(x => x.Id == createTurnoRequest.IdEntrenadorAsignado && x.IdRol == (int)Enums.Roles.Entrenador);
+
+            if (entrenadorAsignar == null)
+            {
+                return ValidationProblem($"No existe el entrenador con id {createTurnoRequest.IdEntrenadorAsignado}.");
+            }
+
             Turno nuevoTurno = new Turno()
             {
                 IdWeb = Guid.NewGuid().ToString("N"),
@@ -39,6 +48,16 @@ namespace relaxgym.api.Controllers
             };
 
             _dbContext.Attach(nuevoTurno);
+
+            await _dbContext.SaveChangesAsync();
+
+            UsuarioTurno nuevoUsuarioTurno = new UsuarioTurno()
+            {
+                Turno = nuevoTurno,
+                Usuario = entrenadorAsignar,
+            };
+
+            _dbContext.Attach(nuevoUsuarioTurno);
 
             await _dbContext.SaveChangesAsync();
 
