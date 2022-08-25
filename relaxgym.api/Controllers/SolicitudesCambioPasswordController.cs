@@ -42,7 +42,7 @@ namespace relaxgym.api.Controllers
 
             if (solicitudActiva != null)
             {
-                bool sendEmailSolicitudActiva = await _mailSenderService.SendEmailAsync(usuario.Email, usuario.NombreUsuario, solicitudActiva.IdWeb);
+                bool sendEmailSolicitudActiva = await _mailSenderService.SendEmailSolicitudCambioPasswordAsync(usuario.Email, usuario.NombreUsuario, solicitudActiva.IdWeb);
 
                 if (!sendEmailSolicitudActiva)
                 {
@@ -64,7 +64,7 @@ namespace relaxgym.api.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            bool sendEmailNuevaSolicitud = await _mailSenderService.SendEmailAsync(usuario.Email, usuario.NombreUsuario, nuevaSolicitudCambioPassword.IdWeb);
+            bool sendEmailNuevaSolicitud = await _mailSenderService.SendEmailSolicitudCambioPasswordAsync(usuario.Email, usuario.NombreUsuario, nuevaSolicitudCambioPassword.IdWeb);
 
             if (!sendEmailNuevaSolicitud)
             {
