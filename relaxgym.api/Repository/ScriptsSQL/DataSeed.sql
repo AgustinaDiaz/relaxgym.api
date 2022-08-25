@@ -181,26 +181,12 @@ SELECT * FROM relaxgym_db.turnos;
 SELECT * FROM relaxgym_db.ejercicios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_turnos;
-INSERT INTO usuarios_turnos VALUES(9,1);
-INSERT INTO usuarios_turnos VALUES(9,2);
-INSERT INTO usuarios_turnos VALUES(9,3);
-INSERT INTO usuarios_turnos VALUES(9,4);
-INSERT INTO usuarios_turnos VALUES(9,7);
-INSERT INTO usuarios_turnos VALUES(9,8);
-INSERT INTO usuarios_turnos VALUES(9,9);
-INSERT INTO usuarios_turnos VALUES(9,10);
-INSERT INTO usuarios_turnos VALUES(9,11);
-INSERT INTO usuarios_turnos VALUES(9,12);
-INSERT INTO usuarios_turnos VALUES(9,13);
-INSERT INTO usuarios_turnos VALUES(9,25);
+DELETE FROM relaxgym_db.usuarios_turnos WHERE IdUsuario NOT IN (9,32);
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.estados_notificaciones;
 SELECT * FROM relaxgym_db.usuarios;
 SELECT * FROM relaxgym_db.solicitudes_cambio_password;
-
-DELETE FROM relaxgym_db.ejercicios_rutinas
-WHERE IdRutina = 2 AND IdEjercicio IN (1,2,3,4);
 
 DELETE FROM relaxgym_db.usuarios
 WHERE Id IN (1, 2, 3, 4, 5, 6, 7, 8 ,9, 10, 11, 12);

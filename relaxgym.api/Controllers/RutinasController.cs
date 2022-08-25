@@ -123,6 +123,26 @@ namespace relaxgym.api.Controllers
             return Ok(rutinas);
         }
 
+        [HttpGet]
+        [Route("UsuarioCreador/{idUsuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<Rutina>))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetRutinaByIdUsuarioCreadorAsync(int idUsuario)
+        {
+            IList<Rutina> rutinas = await _dbContext.Set<Rutina>()
+                                   .Include(x => x.Ejercicios).ThenInclude(x => x.Ejercicio).ThenInclude(x => x.TipoEjercicio)
+                                   .Where(x => x.IdUsuarioCreador == idUsuario)
+                                   .ToListAsync();
+
+            if (rutinas == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(rutinas);
+        }
+
         [HttpDelete]
         [Route("{idRutina}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
