@@ -170,9 +170,6 @@ INSERT INTO relaxgym_db.usuarios VALUES(100,'9ee5a5cb17a548e2a4469711136631c6', 
 INSERT INTO relaxgym_db.usuarios VALUES(101,'49081b11c70444fca07929b39617f45c', 'Fernando', 'Russo', 'russofer@gmail.com', 3443442208, 'frusso', 'russo123', '20220121', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(102,'09e70595ff9a4444bdbe59d95a301a92', 'Diego', 'Schwartzman', 'diegosc@gmail.com', 3443442288, 'dschwartzman', 'schwartzman123', '20220121', 1, 3);
 INSERT INTO relaxgym_db.usuarios VALUES(103,'1822c94fe85f4af3a384268e50f153bb', 'Sol', 'Branz', 'solbranz@gmail.com', 3443444188, 'sbranz', 'branz123', '20220821', 1, 3);
- 
-SELECT * FROM relaxgym_db.usuarios AS U
-WHERE U.IDROL=3;
 
 SELECT * FROM relaxgym_db.tipos_ejercicios;
 SELECT * FROM relaxgym_db.ejercicios;
@@ -181,7 +178,9 @@ SELECT * FROM relaxgym_db.turnos;
 SELECT * FROM relaxgym_db.ejercicios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_rutinas;
 SELECT * FROM relaxgym_db.usuarios_turnos;
-DELETE FROM relaxgym_db.usuarios_turnos WHERE IdUsuario NOT IN (9,32);
+SELECT * FROM relaxgym_db.usuarios_notificaciones;
+DELETE FROM relaxgym_db.turnos;
+DELETE FROM relaxgym_db.usuarios_turnos; WHERE IdUsuario NOT IN (9,32);
 SELECT * FROM relaxgym_db.roles;
 SELECT * FROM relaxgym_db.estados_usuarios;
 SELECT * FROM relaxgym_db.estados_notificaciones;
