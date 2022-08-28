@@ -21,9 +21,12 @@ namespace relaxgym.api.Controllers
     {
         private readonly RelaxGymContext _dbContext;
         private readonly IUsuariosService _usuarioService;
+        private readonly IMailSenderService _mailSenderService;
         public UsuariosController(IUsuariosService usuarioService,
-                                  RelaxGymContext dbContext)
+                                  RelaxGymContext dbContext,
+                                  IMailSenderService mailSenderService)
         {
+            _mailSenderService = mailSenderService;
             _usuarioService = usuarioService;
             _dbContext = dbContext;
         }
@@ -74,6 +77,13 @@ namespace relaxgym.api.Controllers
             _dbContext.Attach(nuevoUsuario);
 
             await _dbContext.SaveChangesAsync();
+
+            bool sendEmailBienvenida = await _mailSenderService.SendEmailBienvenidaAsync(nuevoUsuario.Email, nuevoUsuario.NombreUsuario, nuevoUsuario.ClaveUsuario, string.Concat(nuevoUsuario.Nombre, " ", nuevoUsuario.Apellido));
+
+            if (!sendEmailBienvenida)
+            {
+                return ValidationProblem($"Se creo la solicitud correctamente {nuevoUsuario.IdWeb} pero ocurrio un error al enviar el email.");
+            }
 
             return Ok();
         }
