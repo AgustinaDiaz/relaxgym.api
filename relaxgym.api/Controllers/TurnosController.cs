@@ -103,6 +103,26 @@ namespace relaxgym.api.Controllers
             return Ok(turno);
         }
 
+        [HttpGet]
+        [Route("Alumno/{idUsuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Turno))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTurnoByIdUsuarioAsync(int idUsuario)
+        {
+            Turno turno = await _dbContext.Set<Turno>()
+                                   .Include(x => x.Clase)
+                                   .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
+                                   .FirstOrDefaultAsync(x => x.Id == idUsuario);
+
+            if (turno == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(turno);
+        }
+
         [HttpPut]
         [Route("{idTurno}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
