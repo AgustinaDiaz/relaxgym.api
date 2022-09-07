@@ -120,6 +120,7 @@ namespace relaxgym.api.Repository
             modelBuilder.Entity<Clase>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Clase>().Property(u => u.Nombre).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Clase>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
+            modelBuilder.Entity<Clase>().Property(u => u.Imagen).HasColumnType("binary").IsRequired();
 
             modelBuilder.Entity<EstadoNotificacion>().ToTable("estados_notificaciones");
             modelBuilder.Entity<EstadoNotificacion>().HasKey(u => u.Id).HasName("PRIMARY");

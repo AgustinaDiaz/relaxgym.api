@@ -72,8 +72,13 @@ namespace relaxgym.api.Controllers
         {
             IList<Turno> turnos = await _dbContext.Set<Turno>()
                                    .Include(x => x.Clase)
-                                   .Include(x => x.Usuarios)
+                                   .Include(x => x.Usuarios).ThenInclude(x => x.Usuario).ThenInclude(x => x.Rol)
                                    .ToListAsync();
+
+            foreach (Turno turno in turnos)
+            {
+                turno.FechaHora = turno.FechaHora.ToLocalTime();
+            }
 
             if (turnos == null)
             {
@@ -95,6 +100,8 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
                                    .FirstOrDefaultAsync(x => x.Id == idTurno);
 
+            turno.FechaHora = turno.FechaHora.ToLocalTime();
+
             if (turno == null)
             {
                 return NotFound();
@@ -114,6 +121,9 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Clase)
                                    .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
                                    .FirstOrDefaultAsync(x => x.Id == idUsuario);
+
+
+            turno.FechaHora = turno.FechaHora.ToLocalTime();
 
             if (turno == null)
             {
