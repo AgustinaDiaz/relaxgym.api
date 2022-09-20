@@ -40,6 +40,25 @@ namespace relaxgym.api.Controllers
             return Ok(clases);
         }
 
+        [HttpGet]
+        [Route("{idClase}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Clase))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetClaseByIdAsync(int idClase)
+        {
+            Clase clase = await _dbContext.Set<Clase>()
+                                   .FirstOrDefaultAsync(x => x.Id == idClase);
+
+
+            if (clase == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(clase);
+        }
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -104,6 +123,41 @@ namespace relaxgym.api.Controllers
             }
 
             _dbContext.Clases.Remove(clase);
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("{idClase}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateClaseByIdAsync([FromRoute] int idClase, [FromForm] string nombre, [FromForm] string descripcion, [FromForm] IFormFile imagen)
+        {
+
+            Clase claseActualizar = await _dbContext.Set<Clase>()
+                                                        .Where(x => x.Id == idClase)
+                                                        .FirstOrDefaultAsync();
+            if (claseActualizar == null)
+            {
+                return NotFound();
+            }
+
+            if (imagen.Length > 0)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    imagen.CopyTo(ms);
+                    byte[] fileBytes = ms.ToArray();
+                    claseActualizar.Imagen = fileBytes;
+                }
+            }
+
+            claseActualizar.Nombre = nombre;
+            claseActualizar.Descripcion = descripcion;
 
             await _dbContext.SaveChangesAsync();
 

@@ -49,6 +49,11 @@ namespace relaxgym.api.Controllers
                 return ValidationProblem($"El Usuario/Password son incorrectos.");
             }
 
+            if (usuario.EstadoUsuario.Id == (int)Enums.EstadosUsuario.Inactivo)
+            {
+                return ValidationProblem($"El Usuario se encuentra inactivo. Comuniquese con el administrador.");
+            }
+
             UserToken token = _usuarioService.Authenticate(usuario);
 
             return Ok(token);

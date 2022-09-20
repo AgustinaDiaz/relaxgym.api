@@ -75,9 +75,11 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Usuarios).ThenInclude(x => x.Usuario).ThenInclude(x => x.Rol)
                                    .ToListAsync();
 
+            TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
+
             foreach (Turno turno in turnos)
             {
-                turno.FechaHora = turno.FechaHora.ToLocalTime();
+                turno.FechaHora = TimeZoneInfo.ConvertTimeFromUtc(turno.FechaHora, argentinaTimeZone);
             }
 
             if (turnos == null)
@@ -100,7 +102,8 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
                                    .FirstOrDefaultAsync(x => x.Id == idTurno);
 
-            turno.FechaHora = turno.FechaHora.ToLocalTime();
+            TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
+            turno.FechaHora = TimeZoneInfo.ConvertTimeFromUtc(turno.FechaHora, argentinaTimeZone);
 
             if (turno == null)
             {
@@ -123,7 +126,8 @@ namespace relaxgym.api.Controllers
                                    .FirstOrDefaultAsync(x => x.Id == idUsuario);
 
 
-            turno.FechaHora = turno.FechaHora.ToLocalTime();
+            TimeZoneInfo argentinaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Argentina Standard Time");
+            turno.FechaHora = TimeZoneInfo.ConvertTimeFromUtc(turno.FechaHora, argentinaTimeZone);
 
             if (turno == null)
             {
@@ -151,6 +155,34 @@ namespace relaxgym.api.Controllers
 
             turnoActualizar.CantidadAlumnos = updateTurnoRequest.CantidadAlumnos;
             turnoActualizar.FechaHora = updateTurnoRequest.FechaHora;
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{idTurno}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteTurnoByIdAsync(int idTurno)
+        {
+            Turno turno = await _dbContext.Set<Turno>()
+                                            .Include(x => x.Usuarios).ThenInclude(x => x.Usuario).ThenInclude(x => x.Rol)
+                                            .FirstOrDefaultAsync(x => x.Id == idTurno);
+
+            if (turno == null)
+            {
+                return NotFound();
+            }
+
+            if (turno.Usuarios != null && turno.Usuarios.Any(x => x.Usuario.Rol.Id == (int)Enums.Roles.Alumno))
+            {
+                return ValidationProblem($"No se puede eliminar este turno porque tiene usuarios asignados.");
+            }
+
+            _dbContext.Turnos.Remove(turno);
 
             await _dbContext.SaveChangesAsync();
 
