@@ -227,6 +227,54 @@ namespace relaxgym.api.Controllers
         }
 
         [HttpPost]
+        [Route("Asignar/{idTurno}/{idUsuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AsignarTurnoByIdUsuarioAsync([FromRoute] int idTurno, [FromRoute] int idUsuario)
+        {
+            Turno turnoAsignar = await _dbContext.Set<Turno>().FirstOrDefaultAsync(x => x.Id == idTurno);
+
+            if (turnoAsignar == null)
+            {
+                return ValidationProblem($"No existe el turno con id {idTurno}.");
+            }
+
+            Usuario usuarioAsignar = await _dbContext.Set<Usuario>()
+                                                     .Include(x => x.Turnos).ThenInclude(x => x.Turno)
+                                                     .FirstOrDefaultAsync(x => x.Id == idUsuario);
+
+            if (usuarioAsignar == null)
+            {
+                return ValidationProblem($"El usuario {idUsuario} ya se encuentra asignado a este turno {idTurno}.");
+            }
+
+
+            bool existeTurnoAsignado = usuarioAsignar.Turnos.Any(x => x.Turno.FechaHora.Year == turnoAsignar.FechaHora.Year &&
+                                                                      x.Turno.FechaHora.Month == turnoAsignar.FechaHora.Month &&
+                                                                      x.Turno.FechaHora.Day == turnoAsignar.FechaHora.Day &&
+                                                                      turnoAsignar.FechaHora < x.Turno.FechaHora.AddHours(1) &&
+                                                                      turnoAsignar.FechaHora > x.Turno.FechaHora.AddHours(-1));
+
+            if (existeTurnoAsignado)
+            {
+                return ValidationProblem($"El usuario posee un turno asignado a esa misma fecha y hora.");
+            }
+
+            UsuarioTurno nuevoUsuarioTurno = new UsuarioTurno()
+            {
+                Turno = turnoAsignar,
+                Usuario = usuarioAsignar,
+            };
+
+            _dbContext.Attach(nuevoUsuarioTurno);
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost]
         [Route("Desasignar/{idTurno}/Alumno/{idUsuario}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

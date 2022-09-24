@@ -227,6 +227,7 @@ namespace relaxgym.api.Controllers
             Usuario usuario = await _dbContext.Set<Usuario>()
                                     .Include(x => x.Rutinas)
                                     .Include(x => x.Turnos)
+                                    .Include(x => x.Notificaciones)
                                     .FirstOrDefaultAsync(x => x.Id == idUsuario);
 
             if (usuario == null)
@@ -242,6 +243,11 @@ namespace relaxgym.api.Controllers
             foreach (UsuarioTurno usuarioTurno in usuario.Turnos)
             {
                 _dbContext.UsuariosTurnos.Remove(usuarioTurno);
+            }
+
+            foreach (UsuarioNotificacion usuarioNotificacion in usuario.Notificaciones)
+            {
+                _dbContext.UsuariosNotificaciones.Remove(usuarioNotificacion);
             }
 
             _dbContext.Usuarios.Remove(usuario);
