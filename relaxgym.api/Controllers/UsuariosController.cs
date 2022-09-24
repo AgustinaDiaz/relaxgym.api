@@ -49,6 +49,11 @@ namespace relaxgym.api.Controllers
                 return ValidationProblem($"El Usuario/Password son incorrectos.");
             }
 
+            if (usuario.EstadoUsuario.Id == (int)Enums.EstadosUsuario.Inactivo)
+            {
+                return ValidationProblem($"El Usuario se encuentra inactivo. Comuniquese con el administrador.");
+            }
+
             UserToken token = _usuarioService.Authenticate(usuario);
 
             return Ok(token);
@@ -99,6 +104,11 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Rol)
                                    .ToListAsync();
 
+            foreach (Usuario usuario in usuarios)
+            {
+                usuario.FechaAlta = usuario.FechaAlta.ToLocalTime();
+            }
+
             if (usuarios == null)
             {
                 return NoContent();
@@ -118,6 +128,8 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.EstadoUsuario)
                                    .Include(x => x.Rol)
                                    .FirstOrDefaultAsync(x => x.Id == idUsuario);
+
+            usuario.FechaAlta = usuario.FechaAlta.ToLocalTime();
 
             if (usuario == null)
             {
@@ -140,6 +152,11 @@ namespace relaxgym.api.Controllers
                                    .Where(x => x.IdRol == idRol && x.IdEstadoUsuario == (int)Enums.EstadosUsuario.Activo)
                                    .ToListAsync();
 
+            foreach (Usuario usuario in usuarios)
+            {
+                usuario.FechaAlta = usuario.FechaAlta.ToLocalTime();
+            }
+
             if (usuarios == null)
             {
                 return NotFound();
@@ -160,6 +177,11 @@ namespace relaxgym.api.Controllers
                                    .Include(x => x.Rol)
                                    .Where(x => x.IdRol == idRol && x.IdEstadoUsuario == (int)Enums.EstadosUsuario.Activo && !x.Rutinas.Any(x => x.IdRutina == idRutina))
                                    .ToListAsync();
+
+            foreach (Usuario usuario in usuarios)
+            {
+                usuario.FechaAlta = usuario.FechaAlta.ToLocalTime();
+            }
 
             if (usuarios == null)
             {
@@ -182,6 +204,11 @@ namespace relaxgym.api.Controllers
                                    .Where(x => x.IdRol == idRol && x.IdEstadoUsuario == (int)Enums.EstadosUsuario.Activo && !x.Turnos.Any(x => x.IdTurno == idTurno))
                                    .ToListAsync();
 
+            foreach (Usuario usuario in usuarios)
+            {
+                usuario.FechaAlta = usuario.FechaAlta.ToLocalTime();
+            }
+
             if (usuarios == null)
             {
                 return NotFound();
@@ -200,6 +227,7 @@ namespace relaxgym.api.Controllers
             Usuario usuario = await _dbContext.Set<Usuario>()
                                     .Include(x => x.Rutinas)
                                     .Include(x => x.Turnos)
+                                    .Include(x => x.Notificaciones)
                                     .FirstOrDefaultAsync(x => x.Id == idUsuario);
 
             if (usuario == null)
@@ -215,6 +243,11 @@ namespace relaxgym.api.Controllers
             foreach (UsuarioTurno usuarioTurno in usuario.Turnos)
             {
                 _dbContext.UsuariosTurnos.Remove(usuarioTurno);
+            }
+
+            foreach (UsuarioNotificacion usuarioNotificacion in usuario.Notificaciones)
+            {
+                _dbContext.UsuariosNotificaciones.Remove(usuarioNotificacion);
             }
 
             _dbContext.Usuarios.Remove(usuario);

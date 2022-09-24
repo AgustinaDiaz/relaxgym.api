@@ -31,7 +31,7 @@ namespace relaxgym.api.Repository
         {
             modelBuilder.Entity<SolicitudCambioPassword>().ToTable("solicitudes_cambio_password");
             modelBuilder.Entity<SolicitudCambioPassword>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.FechaSolicitud).HasColumnType("datetime").IsRequired();
             modelBuilder.Entity<SolicitudCambioPassword>().Property(u => u.FechaConfirmacion).HasColumnType("datetime");
@@ -42,25 +42,25 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<EstadoSolicitud>().ToTable("estados_solicitudes");
             modelBuilder.Entity<EstadoSolicitud>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<EstadoSolicitud>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<EstadoSolicitud>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<EstadoSolicitud>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<EstadoSolicitud>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<EstadoUsuario>().ToTable("estados_usuarios");
             modelBuilder.Entity<EstadoUsuario>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<EstadoUsuario>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<EstadoUsuario>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<EstadoUsuario>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<EstadoUsuario>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<Rol>().ToTable("roles");
             modelBuilder.Entity<Rol>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Rol>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Rol>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Rol>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Rol>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<Usuario>().ToTable("usuarios");
             modelBuilder.Entity<Usuario>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Usuario>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Usuario>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.Nombre).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Usuario>().Property(u => u.Apellido).HasColumnType("varchar(100)").IsRequired();
@@ -76,7 +76,7 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<Rutina>().ToTable("rutinas");
             modelBuilder.Entity<Rutina>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Rutina>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Rutina>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.Descripcion).HasColumnType("varchar(1000)").IsRequired();
             modelBuilder.Entity<Rutina>().Property(u => u.Nivel).HasColumnType("varchar(45)").IsRequired();
@@ -96,7 +96,7 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<Turno>().ToTable("turnos");
             modelBuilder.Entity<Turno>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Turno>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Turno>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Turno>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Turno>().Property(u => u.IdClase).HasColumnType("int").IsRequired();
             modelBuilder.Entity<Turno>().HasOne(p => p.Clase).WithMany().HasForeignKey(p => p.IdClase).HasConstraintName("FK_TURNOS_CLASES").IsRequired();
@@ -116,20 +116,21 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<Clase>().ToTable("clases");
             modelBuilder.Entity<Clase>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Clase>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Clase>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Clase>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Clase>().Property(u => u.Nombre).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Clase>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
+            modelBuilder.Entity<Clase>().Property(u => u.Imagen).HasColumnType("binary").IsRequired();
 
             modelBuilder.Entity<EstadoNotificacion>().ToTable("estados_notificaciones");
             modelBuilder.Entity<EstadoNotificacion>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<EstadoNotificacion>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<EstadoNotificacion>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<EstadoNotificacion>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<EstadoNotificacion>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<Notificacion>().ToTable("notificaciones");
             modelBuilder.Entity<Notificacion>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Notificacion>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Notificacion>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Notificacion>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Notificacion>().Property(u => u.Titulo).HasColumnType("varchar(100)").IsRequired();
             modelBuilder.Entity<Notificacion>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
@@ -139,19 +140,19 @@ namespace relaxgym.api.Repository
 
             modelBuilder.Entity<TipoEjercicio>().ToTable("tipos_ejercicios");
             modelBuilder.Entity<TipoEjercicio>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<TipoEjercicio>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<TipoEjercicio>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<TipoEjercicio>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<TipoEjercicio>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<TipoNotificacion>().ToTable("tipos_notificaciones");
             modelBuilder.Entity<TipoNotificacion>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<TipoNotificacion>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<TipoNotificacion>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<TipoNotificacion>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<TipoNotificacion>().Property(u => u.Descripcion).HasColumnType("varchar(100)").IsRequired();
 
             modelBuilder.Entity<Ejercicio>().ToTable("ejercicios");
             modelBuilder.Entity<Ejercicio>().HasKey(u => u.Id).HasName("PRIMARY");
-            modelBuilder.Entity<Ejercicio>().Property(u => u.Id).HasColumnType("int").UseMySqlIdentityColumn().IsRequired();
+            modelBuilder.Entity<Ejercicio>().Property(u => u.Id).HasColumnType("int").UseIdentityColumn().IsRequired();
             modelBuilder.Entity<Ejercicio>().Property(u => u.IdWeb).HasColumnType("char(32)").IsRequired();
             modelBuilder.Entity<Ejercicio>().Property(u => u.Nombre).HasColumnType("varchar(1000)").IsRequired();
             modelBuilder.Entity<Ejercicio>().Property(u => u.Descripcion).HasColumnType("varchar(1000)").IsRequired();

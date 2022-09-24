@@ -132,6 +132,7 @@ namespace relaxgym.api.Controllers
         {
             IList<Rutina> rutinas = await _dbContext.Set<Rutina>()
                                    .Include(x => x.Ejercicios).ThenInclude(x => x.Ejercicio).ThenInclude(x => x.TipoEjercicio)
+                                   .Include(x => x.Usuarios).ThenInclude(x => x.Usuario)
                                    .Where(x => x.IdUsuarioCreador == idUsuario)
                                    .ToListAsync();
 
