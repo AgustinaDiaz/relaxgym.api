@@ -3,6 +3,7 @@ CREATE TABLE clases (
   [IdWeb] char(32) NOT NULL,
   [Nombre] varchar(100) NOT NULL,
   [Descripcion] varchar(1000) NOT NULL,
+  [Imagen] varbinary(max) NOT NULL
   PRIMARY KEY ([Id])
 );
 
@@ -107,7 +108,7 @@ CREATE INDEX [FK_SOLICITUDES_CAMBIO_PASSWORD_USUARIOS_idx] ON solicitudes_cambio
 CREATE INDEX [FK_SOLICITUDES_CAMBIO_PASSWORD_ESTADO_SOLICITUDES_idx] ON solicitudes_cambio_password ([IdEstadoSolicitud]);
 
 CREATE TABLE notificaciones (
-  [Id] int NOT NULL,
+  [Id] int NOT NULL IDENTITY,
   [IdWeb] char(32) NOT NULL,
   [Titulo] varchar(100) NOT NULL,
   [Descripcion] varchar(100) NOT NULL,
